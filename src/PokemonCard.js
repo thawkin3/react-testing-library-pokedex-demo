@@ -1,15 +1,13 @@
 import React from 'react'
-import { makeStyles } from '@mui/styles'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import Typography from '@mui/material/Typography'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import Switch from '@mui/material/Switch'
+import { makeStyles } from '@mui/styles'
 
-import { updatePokemonCapturedStatus } from './graphQLUtils'
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     minWidth: 275,
   },
@@ -27,24 +25,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export function PokemonCard({ pokemon, fetchPokedexData }) {
+export function PokemonCard({ pokemon, setPokedexData }) {
   const classes = useStyles()
 
-  const handleCapturedChange = async () => {
-    const { errors } = await updatePokemonCapturedStatus(
-      pokemon.id,
-      !pokemon.captured
-    )
-
-    if (errors) {
-      console.error(errors)
-    }
-
-    // Re-fetching all the data to make the top-level app aware of the data change.
-    // This was especially important in getting it to remove a Pokemon from the UI
-    // when the Captured filter was selected and then a previously captured Pokemon
-    // was toggled to no longer be captured.
-    fetchPokedexData()
+  const handleCapturedChange = () => {
+    const pokemonIndex = pokemon.id - 1
+    setPokedexData((pokedexData) => [
+      ...pokedexData.slice(0, pokemonIndex),
+      {
+        ...pokedexData[pokemonIndex],
+        captured: !pokedexData[pokemonIndex].captured,
+      },
+      ...pokedexData.slice(pokemonIndex + 1),
+    ])
   }
 
   return (

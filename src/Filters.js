@@ -1,10 +1,10 @@
 import React from 'react'
-import { makeStyles } from '@mui/styles'
 import Paper from '@mui/material/Paper'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
+import { makeStyles } from '@mui/styles'
 
 const pokemonTypes = [
   'Bug',
@@ -27,10 +27,10 @@ const pokemonTypes = [
   'Water',
 ]
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   optionsContainer: {
     background: '#FFF',
-    padding: `${8}px ${16}px`,
+    padding: '8px 16px',
     borderRadius: 4,
     marginBottom: 16,
   },

@@ -1,16 +1,16 @@
 import React from 'react'
+import CircularProgress from '@mui/material/CircularProgress'
 import Container from '@mui/material/Container'
+import Typography from '@mui/material/Typography'
 import { makeStyles } from '@mui/styles'
 import { visuallyHidden } from '@mui/utils'
-import Typography from '@mui/material/Typography'
-import CircularProgress from '@mui/material/CircularProgress'
 
 import { Filters } from './Filters'
 import { PokemonCardsList } from './PokemonCardsList'
 import pokemonLogo from './pokemon-logo.png'
-import { fetchPokemon } from './graphQLUtils'
+import { pokemon } from './pokemon'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     textAlign: 'center',
   },
@@ -35,30 +35,23 @@ const useStyles = makeStyles((theme) => ({
 export default function App() {
   const classes = useStyles()
 
-  const [pokedexData, setPokedexData] = React.useState(null)
+  const [pokedexData, setPokedexData] = React.useState(pokemon)
   const [pokemonTypeFilter, setPokemonTypeFilter] = React.useState('Any')
   const [capturedFilter, setCapturedFilter] = React.useState('Any')
 
-  const fetchPokedexData = React.useCallback(async () => {
-    const { errors, data } = await fetchPokemon({
-      pokemonType: pokemonTypeFilter,
-      isCaptured: capturedFilter,
+  const filteredPokedexData = React.useMemo(() => {
+    return pokedexData.filter((pokemon) => {
+      const isCorrectType =
+        pokemonTypeFilter === 'Any' ||
+        pokemon.pokemonTypes.includes(pokemonTypeFilter)
+      const isCorrectCapturedStatus =
+        capturedFilter === 'Any' ||
+        (capturedFilter === 'Captured' && pokemon.captured) ||
+        (capturedFilter === 'Not Captured' && !pokemon.captured)
+
+      return isCorrectType && isCorrectCapturedStatus
     })
-
-    if (errors) {
-      console.error(errors)
-    }
-
-    const result = data.queryPokemon.sort(
-      (pokemonA, pokemonB) => pokemonA.id - pokemonB.id
-    )
-
-    setPokedexData(result)
-  }, [pokemonTypeFilter, capturedFilter])
-
-  React.useEffect(() => {
-    fetchPokedexData()
-  }, [fetchPokedexData])
+  }, [pokedexData, pokemonTypeFilter, capturedFilter])
 
   return (
     <main className={classes.root}>
@@ -76,8 +69,8 @@ export default function App() {
               setCapturedFilter={setCapturedFilter}
             />
             <PokemonCardsList
-              pokedexData={pokedexData}
-              fetchPokedexData={fetchPokedexData}
+              pokedexData={filteredPokedexData}
+              setPokedexData={setPokedexData}
             />
           </>
         ) : (
