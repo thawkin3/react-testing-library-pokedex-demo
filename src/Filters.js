@@ -60,11 +60,12 @@ export function Filters({
   return (
     <Paper variant="outlined" className={classes.optionsContainer}>
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel>Type</InputLabel>
+        <InputLabel id="type-input-label">Type</InputLabel>
         <Select
           value={pokemonTypeFilter}
           onChange={handlePokemonTypeChange}
           label="Type"
+          labelId="type-input-label"
         >
           <MenuItem value="Any">Any</MenuItem>
           {pokemonTypes.map((type) => (
@@ -75,11 +76,12 @@ export function Filters({
         </Select>
       </FormControl>
       <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel>Captured</InputLabel>
+        <InputLabel id="captured-input-label">Captured</InputLabel>
         <Select
           value={capturedFilter}
           onChange={handleCapturedChange}
           label="Captured"
+          labelId="captured-input-label"
         >
           <MenuItem value="Any">Any</MenuItem>
           <MenuItem value="Captured">Captured</MenuItem>

@@ -41,7 +41,13 @@ export function PokemonCard({ pokemon, setPokedexData }) {
   }
 
   return (
-    <Card className={classes.root} variant="outlined">
+    <Card
+      className={classes.root}
+      variant="outlined"
+      role="group"
+      aria-label={`Pokémon: ${pokemon.name}`}
+      data-testid="pokemonCard"
+    >
       <CardContent>
         <Typography
           className={classes.pokemonIdNumber}
@@ -73,6 +79,7 @@ export function PokemonCard({ pokemon, setPokedexData }) {
             />
           }
           label="Captured"
+          aria-label={`Captured: ${pokemon.name}`}
         />
       </CardActions>
     </Card>
