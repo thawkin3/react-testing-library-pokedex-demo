@@ -8,7 +8,7 @@ import { visuallyHidden } from '@mui/utils'
 import { Filters } from './Filters'
 import { PokemonCardsList } from './PokemonCardsList'
 import pokemonLogo from './pokemon-logo.png'
-import { pokemon } from './pokemon'
+import { pokemonData } from './pokemonData'
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -35,12 +35,19 @@ const useStyles = makeStyles(() => ({
 export default function App() {
   const classes = useStyles()
 
-  const [pokedexData, setPokedexData] = React.useState(pokemon)
+  const [pokedexData, setPokedexData] = React.useState(null)
   const [pokemonTypeFilter, setPokemonTypeFilter] = React.useState('Any')
   const [capturedFilter, setCapturedFilter] = React.useState('Any')
 
+  // Simulating an API request here with a short delay
+  React.useEffect(() => {
+    setTimeout(() => {
+      setPokedexData(pokemonData)
+    }, 500)
+  }, [])
+
   const filteredPokedexData = React.useMemo(() => {
-    return pokedexData.filter((pokemon) => {
+    return pokedexData?.filter((pokemon) => {
       const isCorrectType =
         pokemonTypeFilter === 'Any' ||
         pokemon.pokemonTypes.includes(pokemonTypeFilter)

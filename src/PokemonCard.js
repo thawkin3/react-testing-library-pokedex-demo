@@ -56,11 +56,7 @@ export function PokemonCard({ pokemon, setPokedexData }) {
         >
           {pokemon.id}
         </Typography>
-        <img
-          alt={pokemon.name}
-          src={pokemon.imgUrl}
-          className={classes.avatar}
-        />
+        <img alt="" src={pokemon.imgUrl} className={classes.avatar} />
         <Typography variant="h5" component="h2">
           {pokemon.name}
         </Typography>

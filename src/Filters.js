@@ -58,7 +58,11 @@ export function Filters({
   }
 
   return (
-    <Paper variant="outlined" className={classes.optionsContainer}>
+    <Paper
+      variant="outlined"
+      className={classes.optionsContainer}
+      data-testid="filters"
+    >
       <FormControl variant="outlined" className={classes.formControl}>
         <InputLabel id="type-input-label">Type</InputLabel>
         <Select
@@ -66,6 +70,7 @@ export function Filters({
           onChange={handlePokemonTypeChange}
           label="Type"
           labelId="type-input-label"
+          data-testid="type-input"
         >
           <MenuItem value="Any">Any</MenuItem>
           {pokemonTypes.map((type) => (
@@ -82,6 +87,7 @@ export function Filters({
           onChange={handleCapturedChange}
           label="Captured"
           labelId="captured-input-label"
+          data-testid="captured-input"
         >
           <MenuItem value="Any">Any</MenuItem>
           <MenuItem value="Captured">Captured</MenuItem>

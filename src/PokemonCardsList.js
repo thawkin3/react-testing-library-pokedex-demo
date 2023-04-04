@@ -24,7 +24,12 @@ export function PokemonCardsList({ pokedexData, setPokedexData }) {
   const classes = useStyles()
 
   return pokedexData.length > 0 ? (
-    <Grid container className={classes.root} spacing={2}>
+    <Grid
+      container
+      className={classes.root}
+      spacing={2}
+      data-testid="pokemonCardsList"
+    >
       {pokedexData.map((pokemon) => (
         <Grid key={pokemon.name} item xs={12} sm={6} md={4} lg={3}>
           <PokemonCard pokemon={pokemon} setPokedexData={setPokedexData} />
