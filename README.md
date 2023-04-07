@@ -6,10 +6,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Scripts for Local Development
 
-- `yarn build`: Builds the production app
-- `yarn eject`: Ejects the app from using React Scripts
-- `yarn format`: Formats the code using Prettier
-- `yarn format:watch`: Runs Prettier in watch mode
-- `yarn start`: Starts the development server on port 3000
-- `yarn test`: Runs the tests in watch mode
-- `yarn test:coverage`: Runs the tests not in watch mode and collects coverage
+- `npm run build`: Builds the production app
+- `npm run eject`: Ejects the app from using React Scripts
+- `npm run format`: Formats the code using Prettier
+- `npm run format:watch`: Runs Prettier in watch mode
+- `npm start`: Starts the development server on port 3000
+- `npm test`: Runs the tests in watch mode
+- `npm run test:coverage`: Runs the tests not in watch mode and collects coverage
